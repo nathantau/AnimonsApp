@@ -16,6 +16,7 @@ import {
   StatusBar,
   TextInput,
   Button,
+  TouchableNativeFeedback
 } from 'react-native';
 
 import {
@@ -53,8 +54,14 @@ class PizzaTranslator extends Component {
 
 
 
+function _onPressButton(){
+	alert('tapped')
+}
 
 const App: () => React$Node = () => {
+
+
+
   return (
     <>
       <StatusBar />
@@ -71,7 +78,7 @@ const App: () => React$Node = () => {
 
 				<View style = {{justifyContent: 'space-between', backgroundColor: 'white',}}>
 
-								<View style = {{marginLeft:30, marginRight: 30, paddingBottom: 30}}>
+								<View style = {{margin: 30}}>
         						<Button
         							onPress={() => {
         								alert('You tapped the button!');
@@ -80,7 +87,7 @@ const App: () => React$Node = () => {
         						/>
         				</View>
 
-        				<View style = {{marginLeft:30, marginRight: 30, paddingBottom: 30}}>
+								<View style = {{margin: 30}}>
         						<Button
         							onPress={() => {
         								alert('You tapped the button!');
@@ -89,18 +96,27 @@ const App: () => React$Node = () => {
         						/>
         				</View>
 
-        				<View style = {{marginLeft:30, marginRight: 30, paddingBottom: 30}}>
+        				<View style = {{margin: 30}}>
         						<Button
         							onPress={() => {
         								alert('You tapped the button!');
         							}}
-        							title="Capture"
+        							title="My Friendsf"
         						/>
         				</View>
 
+			</View>
+
+
+			<View style={styles.bottom}>
+						<TouchableNativeFeedback
+												onPress={_onPressButton}
+												background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
+											<View style={styles.button}>
+												<Text style={styles.buttonText}>CAPTURE {Platform.OS !== 'android' ? '(Android only)' : ''}</Text>
+											</View>
+						</TouchableNativeFeedback>
 				</View>
-
-
 
 
 
@@ -153,6 +169,21 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
   },
   button: {
+    alignItems: 'center',
+    backgroundColor: '#2196F3',
+    color: 'white',
+    height: 300,
+    justifyContent: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  bottom: {
+    flex: 1,
+    height: 300,
+    justifyContent: 'flex-end',
   },
 });
 
