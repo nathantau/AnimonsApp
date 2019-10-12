@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import Header from './CustomComponents/Header'
+import CameraScreen from './CustomComponents/CameraScreen'
 
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -46,71 +47,78 @@ function _onPressButton(){
 	alert('tapped')
 }
 
-const App: () => React$Node = () => {
+class HomeScreen extends Component {
 
-  return (
-    <>
-      <StatusBar />
+    static navigationOptions = {
+        header: null
+    }
 
-			{global.HermesInternal == null ? null : (
-				<View style={styles.engine}>
-					<Text style={styles.footer}>Engine: Hermes</Text>
-				</View>
-			)}
+	render(){
+		const {navigate} = this.props.navigation;
 
-			<View style = {{backgroundColor: 'white', flex: 1,}}>
+	return (
+      <>
+        <StatusBar />
 
-				<Header/>
+  			<View style = {{backgroundColor: 'white', flex: 1,}}>
 
-				<View style = {{justifyContent: 'space-between', backgroundColor: 'white',}}>
+  				<Header/>
 
-								<View style = {{margin: 30}}>
-        						<Button
-        							onPress={() => {
-        								alert('You tapped the button!');
-        							}}
-        							title="My Animons"
-        						/>
-        				</View>
+  				<View style = {{justifyContent: 'space-between', backgroundColor: 'white',}}>
 
-								<View style = {{margin: 30}}>
-        						<Button
-        							onPress={() => {
-        								alert('You tapped the button!');
-        							}}
-        							title="My Profile"
-        						/>
-        				</View>
+  								<View style = {{margin: 30}}>
+          						<Button
+          							onPress={() => {
+          								alert('You tapped the button!');
+          							}}
+          							title="My Animons"
+          						/>
+          				</View>
 
-        				<View style = {{margin: 30}}>
-        						<Button
-        							onPress={() => {
-        								alert('You tapped the button!');
-        							}}
-        							title="My Friendsf"
-        						/>
-        				</View>
+  								<View style = {{margin: 30}}>
+          						<Button
+          							onPress={() => {
+          								alert('You tapped the button!');
+          							}}
+          							title="My Profile"
+          						/>
+          				</View>
 
-			</View>
+          				<View style = {{margin: 30}}>
+          						<Button
+          							onPress={() => {
+          								alert('You tapped the button!');
+          							}}
+          							title="My Friendsf"
+          						/>
+          				</View>
 
-
-			<View style={styles.bottom}>
-						<TouchableNativeFeedback
-												onPress={_onPressButton}
-												background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
-											<View style={styles.button}>
-												<Text style={styles.buttonText}>CAPTURE {Platform.OS !== 'android' ? '(Android only)' : ''}</Text>
-											</View>
-						</TouchableNativeFeedback>
-				</View>
+  			</View>
 
 
+  			<View style={styles.bottom}>
+  						<TouchableNativeFeedback
 
-			</View>
+                              onPress={() => navigate('CameraScreen', {name: 'Jane'})}
 
-    </>
-  );
+  												background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
+  											<View style={styles.button}>
+  												<Text style={styles.buttonText}>CAPTURE {Platform.OS !== 'android' ? '(Android only)' : ''}</Text>
+  											</View>
+  						</TouchableNativeFeedback>
+  				</View>
+
+  			</View>
+
+      </>
+    );
+
+
+	}
+
+
 };
+
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -153,11 +161,14 @@ const styles = StyleSheet.create({
 
 const AppNavigator = createStackNavigator({
   Home: {
-    screen: App,
+    screen: HomeScreen,
+  },
+  CameraScreen: {
+  	screen: CameraScreen,
   },
 });
 
-const AppContainer = createAppContainer(AppNavigator);
+const App = createAppContainer(AppNavigator);
 
 
 export default App;
