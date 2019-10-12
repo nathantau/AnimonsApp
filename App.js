@@ -13,6 +13,9 @@ import {
 
 import Header from './CustomComponents/Header'
 
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
 class PizzaTranslator extends Component {
 
 	  constructor(props) {
@@ -39,14 +42,11 @@ class PizzaTranslator extends Component {
 }
 
 
-
 function _onPressButton(){
 	alert('tapped')
 }
 
 const App: () => React$Node = () => {
-
-
 
   return (
     <>
@@ -150,5 +150,14 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
 });
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: App,
+  },
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
 
 export default App;
