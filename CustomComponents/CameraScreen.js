@@ -1,5 +1,5 @@
 import React, {Component, PureComponent} from 'react';
-import { RNCamera } from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 'use strict';
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -28,7 +28,7 @@ class CameraScreen extends PureComponent {
 					type={RNCamera.Constants.Type.back}
 					captureAudio={false}
 
-					flashMode={RNCamera.Constants.FlashMode.on}
+					flashMode={RNCamera.Constants.FlashMode.off}
 					androidCameraPermissionOptions={{
 						title: 'Permission to use camera',
 						message: 'We need your permission to use your camera',
@@ -58,15 +58,31 @@ class CameraScreen extends PureComponent {
 		if (this.camera) {
 			const options = { quality: 0.5, base64: true };
 			const data = await this.camera.takePictureAsync(options);
+
+			alert(data.uri);
+
+			upload(data);
+
 			console.log(data.uri);
 		}
 	};
 
-
-
-
 }
 
+const upload = (file) => {
+  fetch('https://9245a40f.ngrok.io', { // Your POST endpoint
+    method: 'POST',
+    headers: {
+    },
+    body: file // This is your file object
+  }).then(
+    response => response.json() // if the response is a JSON object
+  ).then(
+    success => alert(success.message) // Handle the success response object
+  ).catch(
+    error => alert(error) // Handle the error response object
+  );
+};
 
 
 const styles = StyleSheet.create({
