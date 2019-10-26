@@ -70,15 +70,14 @@ class CameraScreen extends PureComponent {
 }
 
 const upload = (file) => {
-  fetch('https://9245a40f.ngrok.io', { // Your POST endpoint
+  fetch('https://fafb9e51.ngrok.io', { // Your POST endpoint
     method: 'POST',
     headers: {
     },
     body: file // This is your file object
   }).then(
-    response => response.json() // if the response is a JSON object
-  ).then(
-    success => alert(success.message) // Handle the success response object
+    response => response.json().then(
+    success => alert('success' + JSON.stringify(success))) // Handle the success response object
   ).catch(
     error => alert(error) // Handle the error response object
   );
